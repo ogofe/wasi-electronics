@@ -1,0 +1,220 @@
+{% extends '../base.html' %}
+{% load static %}
+
+{% block meta_tags %}
+<meta name="robots" content="{{ max_image_preview }}">
+<meta name="robots" content="{{ robot_meta }}">
+{% endblock meta_tags %}
+
+{% block content %}
+
+    <header class="header mb-5">
+        <div class="hero">
+            <div class="row ml-0 mr-0 mb-7">
+                <div class="col-md-3 col-lg-5">
+                    
+                </div>
+
+                <div class="col-md-9 col-lg-7">
+                    <div class="hero-text">
+                        <h1 class="text-white "> Power Up Your Life. </h1>
+                        <p class="text-white mt-3"> With Clean Renewable energy, at affordable cost</p>
+                        <p class="bold brand text-white mb-5 mt-2 ml-5" style="font-family: 'Agency FB';"> - WASI ELECTRONICS</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-start m-auto"> Our Solutions </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="p-5 text-center">
+        <h4 class="fas fa-lightbulb-o d-block mt-2" style="color:rgb(255, 136, 0)"></h4>
+    </div>
+
+    <div id="about" class="mb-7 mt-1">
+        <div class="heading p-2">
+            <h2 class="text-center"> About Us </h2>
+        </div>
+
+        <div class="container mt-5">
+            <p class="">
+                With over 25 years experience, working and innovating with renewable energy sources, we're professionals.
+            </p>
+
+            <p class="">
+                Iure unde quia, numquam autem rerum architecto necessitatibus, 
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                consequuntur dolor cupiditate corrupti blanditiis, magni veritatis dolorem quod vero deserunt. Ad, a vero!
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                consequuntur dolor cupiditate corrupti blanditiis, magni veritatis dolorem quod vero deserunt. Ad, a vero!
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
+                consequuntur dolor cupiditate corrupti blanditiis, magni veritatis dolorem quod vero deserunt. Ad, a vero!
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                consequuntur dolor cupiditate corrupti blanditiis, magni veritatis dolorem quod vero deserunt. Ad, a vero!
+            </p>
+        </div>
+    </div>
+
+    <hr />
+    
+    <div class="p-5 text-center">
+        <h4 class="fas fa-wrench d-block mt-2" style="color:rgb(14, 102, 36)"></h4>
+    </div>
+    
+    <div id="proof" class="mb-0 mt-5">
+        <div class="heading">
+            <h2 class="text-center p-2"> What We've Done </h2>
+
+            <div id="projects" class="carousel bg-light slides">
+                <a onclick="nextSlide('projects', -1)" class="carousel-control-prev bg-dark">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+    
+                <a onclick="nextSlide('projects', 1)" class="carousel-control-next bg-dark">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+    
+                <div class="carousel-inner">
+                    {% for proof in proof_of_work %}
+                        <div class="carousel-item {% if forloop.counter == 1 %} active {% else %} closed {% endif %} slide proof-slide">
+                            <div class="text-center ">
+                                <img src="http://localhost:8000/media/{{ proof.image.url }}" class="" style="max-width: 400px" width="100%" height="400px" />
+                            </div>
+                            <div class="mt-4 w-fit ml-auto dark_text mr-auto caption text-center mb-4">
+                                <p class="h5 bold">{{ proof.title }}</p>
+
+                                <p class="">
+                                    <a href="{% url 'core:project-page' proof.title %}" class="btn bold rounded btn-dark cta"> More Details </a>
+                                </p>
+                            </div>
+                        </div>    
+                    {% endfor %}
+                </div>
+    
+                <ol class="carousel-indicators">
+                    {% for proof in proof_of_work %}
+                        <li class="bg-dark {% if forloop.counter == 1 %} active {% endif %}"></li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+       
+
+        <section class="mt-7">
+            
+            <div class="p-5 text-center">
+                <h4 class="fas fa-comments d-block mt-2" style="color:rgb(184, 31, 107)"></h4>
+            </div>
+
+            <div class="heading mt-3 mb-5 p-2 ">
+                <h4 class="text-center" > Our Customer's Stories </h4>
+            </div>
+            
+            <div id="reviews" class="carousel bg-dark slides">
+                <a onclick="nextSlide('reviews', -1)" class="carousel-control-prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+    
+                <a onclick="nextSlide('reviews', 1)" class="carousel-control-next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+    
+                <div class="carousel-inner ">
+                    <div class="carousel-item active slide ">
+                        <p class="">
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas sit minima optio accusantium similique. Repellendus rem quisquam natus provident, voluptas asperiores tempore? Odit asperiores minima eius hic dolor ducimus iure?
+                        </p>
+                        
+                        <div class=" mt-4 small bold text-white w-fit ml-auto mr-auto mt-4 caption text-center mb-4">
+                            <p>Engr. Ado - National Eye Center Kaduna</p>
+                        </div>
+                    </div>
+    
+                    <div class="carousel-item slide closed">
+                        <p class="">
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas sit minima optio accusantium similique. Repellendus rem quisquam natus provident, voluptas asperiores tempore? Odit asperiores minima eius hic dolor ducimus iure?
+                        </p>
+                        
+                        <div class=" mt-4 small bold text-white w-fit ml-auto mr-auto mt-4 caption text-center mb-4">
+                            <p> Deacon Iliya - Assemblies Of God Church, Barnawa</p>
+                        </div>
+                    </div>
+    
+                </div>
+    
+                <ol class="carousel-indicators">
+                    <li class="active"></li>
+                    <li class=""></li>
+                </ol>
+            </div>
+        </section>
+    </div>
+    
+    <div id="contact" class="mt-0 bg-light pt-3 pb-5">
+        <div class="p-5 text-center">
+            <h4 class="fas fa-terminal d-block mt-2" style="color:rgb(102, 22, 155)"></h4>
+        </div>
+    
+        <div class="heading">
+            <h2 class="text-center text-muted" > Contact Us </h2>
+        </div>
+
+        <div class="container-fluid mt-7">
+            <div class="row ml-0 mr-0">
+
+                <div class="col-md-4 col-lg-5 mb-5">
+                    <ul class="list-unstyled">
+                        <li>
+                            <h6 class="text-muted"> Head Office</h6>
+                            <p class="text-muted">
+                                <i class="fas fa-building"></i>
+                                GF-11 Mathis Plaza - Kamazou. <br /> Kaduna State. Nigeria.
+                            </p>
+                        </li>
+                        
+                        <li>
+                            <h6 class="text-muted"> Phone Number </h6>
+                            <p class="text-muted">
+                                <i class="fas fa-phone"></i>
+                                0806 318 2576 | 0809 640 8197
+                            </p>
+                        </li>
+                        
+                        <li>
+                            <div class="w-100 bg-light rounded" style="">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3923.5120697690268!2d7.477531114327182!3d10.460238892536548!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104d4ba63ed8a7ab%3A0xf4bfa5252967a59!2sWasi%20Electronics%20Limited!5e0!3m2!1sen!2sng!4v1639690129839!5m2!1sen!2sng" height="300" style="border:0; min-width: 100%; max-width: 100%; border-radius: 10px" allowfullscreen="" loading="lazy"></iframe>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-8 col-lg-7">
+                    <form action="{% url 'core:message' %}" method="post">
+                    	{% csrf_token %}
+                        <div class="form-group">
+                            <label for="name" class="bold text-muted"> Your Name </label>
+                            <input required="" type="text" name="name" id="" class="form-control p-3 rounded-0">
+                        </div>
+                        
+                        <div class="form-group mt-3">
+                            <label for="name" class="bold text-muted"> Your Email </label>
+                            <input required="" type="text" name="email" id="" class="form-control p-3 rounded-0">
+                        </div>
+                        
+                        <div class="form-group mt-3">
+                            <label for="name" class="bold text-muted"> Your Message </label>
+                            <textarea required="" name="email" id="" class="form-control p-3 rounded-0" style="resize: none; height: 200px;"></textarea>
+                        </div>
+
+                        <button class="btn btn-dark rounded-0 btn-block bold p-3"> Leave us a message </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

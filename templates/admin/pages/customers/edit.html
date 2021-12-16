@@ -1,0 +1,45 @@
+{% extends '../base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container">
+    <div class="d-flex mt-3 mb-4 align-items-center navigation justify-content-start">
+        <a href="{% url 'wasi_admin:customers-list' %}" class="btn shadow-sm btn-sm btn-dark bold"> <span class="fas fa-chevron-left"></span> Back </a>
+        <h6 class="text-dark ml-3 mb-0 bold"> Change customer details </h6>
+    </div>
+   
+    <div class="form-wrapper mt-5 m-0" style="max-width: 600px;">
+        <form enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            <div class="card border-0 p-2 mb-4 form-group shadow-sm">
+                <p class="form-label font-weight-bold mb-1"> First name </p>
+                <input type="text" value="{{ person.first_name }}" name="first_name" id="" required class="form-control">
+            </div>
+
+            <div class="card border-0 p-2 mb-4 form-group shadow-sm">
+                <p class="form-label font-weight-bold mb-1"> Last name </p>
+                <input type="text" value="{{ person.last_name }}" name="last_name" id="" required class="form-control">
+            </div>
+            
+            <div class="card border-0 p-2 mb-4 form-group shadow-sm">
+                <p class="form-label font-weight-bold mb-1"> Phone number </p>
+                <input type="tel" value="{{ person.phone_number }}" name="phone_number" id="" required class="form-control">
+            </div>
+            
+            <div class="card border-0 p-2 mb-4 form-group shadow-sm">
+                <p class="form-label font-weight-bold mb-1"> Email </p>
+                <input type="email" value="{{ person.email }}" name="email" id="" required class="form-control">
+            </div>
+
+            <div class="card border-0 p-2 mb-4 form-group shadow-sm">
+                <p class="form-label font-weight-bold mb-1"> Address </p>
+                <input type="address" value="{{ person.address }}" name="address" id="" class="form-control">
+            </div>
+            
+            <button class="btn font-weight-bold btn-sm btn-primary"> Save changes </button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

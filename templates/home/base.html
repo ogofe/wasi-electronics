@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="Wasi Electronics LLC">
+    <meta name="description" content="Wasi Electronics, Solar Powered Traffic Lights, Security Systems,
+     dealers in heavy duty Inverters an UPS', Solar Powered Boreholes and More...">
+    <meta name="robots" content="{{ robot_meta }}">
+    {% block meta_tags %} {% endblock %}
+    <meta name="google_bot" content="{{ google_bot_meta }}">
+
+    <!-- Facebook -->
+    <meta name="og:title" content="Wasi Electronics">
+    <meta name="og:description" content="Innovation powered by renewable energy.">
+    <meta name="og:image" content="{{ google_bot_meta }}">
+    <meta name="og:url" content="https://www.wasi-electronics.com">
+    <meta name="og:site_name" content="Wasi Electronics Ltd.">
+
+    <!-- Twitter -->
+    <meta name="twitter:title" content="Wasi Electronics">
+    <meta name="twitter:description" content="Innovation powered by renewable energy.">
+    <meta name="twitter:image" content="{{ google_bot_meta }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image:alt" content="Wasi Electronics Inverter">
+    
+    <title> {{ title|default:"Wasi Electronics" }} {% if subtitle %} - {{ subtitle }} {% endif %} </title>
+    <link rel="stylesheet" href="{% static 'wasi_site/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'wasi_site/css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'wasi_site/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'wasi_site/css/styles.css' %}">
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="container-fluid">
+            <h3 class="navbar-brand text-white mb-0" style="font-family: cursive; color: orange !important;"> W </h3>
+
+            <button class="navbar-toggler text-white navbar-light" onclick="toggleNav()">
+                <i class="fas fa-power-off"></i>
+            </button>
+
+            <div class="nav-wrapper closed">
+                <ul class="nav ">
+                    <li class="nav-link-item">
+                        <a href="/#about" class="nav-link"> About Us </a>
+                    </li>
+
+                    <li class="nav-link-item dropdown">
+                        <a href="javascript:void()" class="nav-link dropdown-toggle " id="services__toggle"> Our Solutions </a>
+
+                        <ul class="dropdown-menu p-0">
+                            {% for solution in all_solutions %}
+                            <li class="dropdown-item">
+                                <a href="#" class="nav-link text-dark"> {{ solution.name }} </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+
+                    <li class="nav-link-item">
+                        <a href="/#contact" class="nav-link"> Contact Us </a>
+                    </li>
+
+                    <li class="nav-link-item">
+                        <a href="{% url 'core:get-quote' %}" class="nav-link"> Get A Quote </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="content">
+    {% block content %}
+
+    {% endblock content %}
+    </section>
+
+    <footer class="footer">
+        <h3 class="dark_text"> Wasi Electronics </h3>
+        <div class="mt-2 mb-3 dark_text" style="max-width: 600px;">
+            <p class="small"> Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-sm-6">
+                <h5 class="dark_text"> Company </h5>
+                <ul class="list-unstyled pl-3">
+                    <li class="mb-2">
+                        <a href="#" class="h6 small bold no-decor dark_text">Investors</a>
+                    </li>
+
+                    <li class="mb-2">
+                        <a href="{% url 'wasi_admin:login-page' %}" class="h6 small bold no-decor dark_text">Staff Portal</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="col-sm-6">
+                <h5 class="dark_text"> Social Media Links </h5>
+                <ul class="list-unstyled pl-3">
+                    <li class="mb-2">
+                        <a href="#" class=" d-flex align-center no-decor dark_text">
+                            <img class="icon small" src="{% static 'wasi_site/images/logo-facebook.svg' %}">
+                            <h6 class="mb-0 ml-2 small bold"> Facebook </h6>
+                        </a>
+                    </li>
+                    
+                    <li class="mb-2">
+                        <a href="#" class=" d-flex align-center no-decor dark_text">
+                            <img class="icon small" src="{% static 'wasi_site/images/logo-whatsapp.svg' %}">
+                            <h6 class="mb-0 ml-2 small bold"> WhatsApp </h6>
+                        </a>
+                    </li>
+                    
+                    <li class="mb-2">
+                        <a href="#" class=" d-flex align-center no-decor dark_text">
+                            <img class="icon small" src="{% static 'wasi_site/images/logo-instagram.svg' %}">
+                            <h6 class="mb-0 ml-2 small bold"> Instagram </h6>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <h6 class="bold small mt-4 text-center dark_text"> <i class="fas fa-copyright"></i> 2021 </h6>
+
+    </footer>
+
+    <button id="backtotop" class="hide">
+        <span class="fas fa-chevron-up bold text-white"> </span>
+    </button>
+
+    <script src="{% static 'wasi_site/js/jquery.min.js' %}"></script>
+    <script src="{% static 'wasi_site/js/bootstrap.js' %}"></script>
+    <script src="{% static 'wasi_site/js/jquery-ui.js' %}"></script>
+    <script src="{% static 'wasi_site/js/actions.js' %}"></script>
+</body>
+</html>

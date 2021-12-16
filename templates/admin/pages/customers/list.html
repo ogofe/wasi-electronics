@@ -1,0 +1,72 @@
+{% extends '../base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container">
+    <div class="d-flex mt-3 mb-4 align-items-center navigation justify-content-start">
+        <a href="{% url 'wasi_admin:dashboard' %}" class="btn shadow-sm btn-sm btn-dark bold"> <span class="fas fa-chevron-left"></span> Back </a>
+        <h6 class="text-dark ml-3 mb-0 bold"> Customers </h6>
+    </div>
+    
+    <div class="row justify-content-between m-0">
+        <div class="search-box"></div>
+        <a href="{% url 'wasi_admin:add-customer' %}" class="btn shadow-sm btn-primary bold"> <span class="fas fa-plus"></span> Add Customer </a>
+    </div>
+
+    <div class="mt-4">
+        {% if customers.count > 0 %}
+            <table class="mt-5 w-100 text-nowrap d-block">
+                <thead>
+                    <th class="bold p-2 bg-dark text-white "> S/N </th>
+                    <th class="bold p-2 bg-dark text-white w-50"> Name </th>
+                    <th class="bold p-2 bg-dark text-white w-25"> Email </th>
+                    <th class="bold p-2 bg-dark text-white w-25"> Phone Number </th>
+                    <th class="bold p-2 bg-dark text-white w-50"> Address </th>
+                    <th class="bold p-2 bg-dark text-white w-25"> Actions </th>
+                </thead>
+                <tbody>
+                {% for person in customers %}
+                <tr class="w-50 {% if forloop.counter|divisibleby:"2" == 0 %} bg-light {% else %} bg-dark text-light {% endif %}">
+                        <td class=" p-2">
+                            <span class=""> {{ forloop.counter }} </span>
+                        </td>
+                        <td class="p-2">
+                            <span class=""> {{ person.first_name }} {{ person.last_name }} </span>
+                        </td>
+                        <td class="w-25 p-2">
+                            <span class=""> {{ person.email }} </span>
+                        </td>
+                        <td class="w-25 p-2">
+                            <span class=""> {{ person.phone_number }} </span>
+                        </td>
+                        <td class="w-25 p-2">
+                            <span class=""> {{ person.address|default:"No address specified" }} </span>
+                        </td>
+                        <td class="w-25 p-2 d-flex justify-content-start">
+                            <a href="{% url 'wasi_admin:edit-customer' person.id %}" class="btn btn-sm p-2 small btn-warning">
+                                <span class="fas fa-edit"></span>
+                            </a>
+
+                            <a href="{% url 'wasi_admin:delete' 'customer' person.id %}" class="btn btn-sm ml-4 p-2 small btn-danger">
+                                <span class="fas fa-trash"></span>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="container text-center mt-5">
+                <h1 class="fas fa-inbox"></h1>
+                <p class="text-muted">
+                    There are no products in the store
+                </p>
+
+                <a href="{% url 'wasi_admin:add-customer' %}" class="btn btn-sm font-weight-bold btn-info"> Add a new Customer </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}

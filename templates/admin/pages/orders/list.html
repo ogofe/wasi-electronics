@@ -1,0 +1,68 @@
+{% extends '../base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container">
+    <div class="d-flex mt-3 mb-4 align-items-center navigation justify-content-start">
+        <a href="{% url 'wasi_admin:dashboard' %}" class="btn shadow-sm btn-sm btn-dark bold"> <span class="fas fa-chevron-left"></span> Back </a>
+        <h6 class="text-dark ml-3 mb-0 bold"> Orders </h6>
+    </div>
+    
+    <div class="row justify-content-between m-0">
+        <div class="search-box"></div>
+        <a href="{% url 'wasi_admin:add-order' %}" class="btn shadow-sm btn-primary bold"> <span class="fas fa-plus"></span> Add Order </a>
+    </div>
+
+    <div class="mt-4">
+        {% if orders.count > 0 %}
+            <table class="mt-5 w-100 text-nowrap d-block">
+                <thead>
+                    <th class="bold p-2 bg-dark text-white"> S/N </th>
+                    <th class="bold p-2 bg-dark text-white w-25"> Invoice </th>
+                    <th class="bold p-2 bg-dark text-white w-50"> Customer </th>
+                    <th class="bold p-2 bg-dark text-white w-25"> Status </th>
+                    <th class="bold p-2 bg-dark text-white w-25"> Actions </th>
+                </thead>
+                <tbody>
+                {% for order in orders %}
+                <tr class="{% if forloop.counter|divisibleby:"2" == 0 %} bg-light {% else %} bg-dark text-light {% endif %}">
+                        <td class=" p-2">
+                            <span class=""> {{ forloop.counter }} </span>
+                        </td>
+                        <td class="p-2">
+                            <span class=""> {{ order.invoice }} </span>
+                        </td>
+                        <td class="w-50 p-2">
+                            <span class=""> {{ order.owner }} </span>
+                        </td>
+                        <td class="p-2 w-25">
+                            <span class=""> {{ order.status }} </span>
+                        </td>
+                        <td class="w-25 p-2 d-flex justify-content-start">
+                            <a href="{% url 'wasi_admin:order-detail' order.invoice %}" class="btn btn-sm p-2 small btn-info">
+                                <span class="fas fa-eye"></span>
+                            </a>
+
+                            <a href="{% url 'wasi_admin:delete' 'order' order.id %}" class="btn btn-sm ml-4 p-2 small btn-danger">
+                                <span class="fas fa-trash"></span>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="container text-center mt-5">
+                <h1 class="fas fa-inbox" style="font-size: 70px;"></h1>
+                <p class="text-muted h3 bold mt-4 mb-3">
+                    There are no orders yet!
+                </p>
+
+                <a href="{% url 'wasi_admin:add-order' %}" class="btn font-weight-bold btn-primary mt-4"> Add a new Order </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}

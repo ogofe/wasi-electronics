@@ -1,0 +1,81 @@
+{% extends '../base.html' %}
+
+{% block content %}
+
+<div id="quote" class="container">
+	<div class="mb-5 text-center">
+    	<h2 class="mb-3"> Get A Quote </h2>
+    	<h6> In need of any of our products or services? Get a quote from us today!</h6>
+    </div>
+
+	<form id="quote-form" class="mt-4">
+		{% csrf_token %}
+		<div class="form-group card p-2 border-0 rounded shadow-sm mb-3">
+			<p class="label mb-1"> Full name </p>
+			<input required="true" class="form-control" type="text" name="full_name">
+		</div>
+
+		<div class="form-group card p-2 border-0 rounded shadow-sm mb-3">
+			<p class="label mb-1"> Email </p>
+			<input required="true" class="form-control" type="text" name="email">
+		</div>
+
+		<div class="form-group card p-2 border-0 rounded shadow-sm mb-3">
+			<p class="label mb-1"> Phone number </p>
+			<input required="true" class="form-control" type="tel" name="phone">
+		</div>
+
+		<div class="form-group card p-2 border-0 rounded shadow-sm mb-3">
+			<p class="label mb-1"> Company name <small> (optional) </small> </p>
+			<input type="text" class="form-control" name="company">
+		</div>
+
+		<div class="form-group card p-2 border-0 rounded shadow-sm mb-3">
+			<p class="label mb-1"> Desired product / service </p>
+			<select class="form-control">
+				<option> Solar Power Electrical Supply </option>
+				<option> Solar Powered Water Heater </option>
+				<option> Street Light  </option>
+				<option> Security Systems </option>
+			</select>
+		</div>
+
+		<div class="form-group card p-2 border-0 rounded shadow-sm mb-3">
+			<p class="label mb-1"> Desired use case </p>
+
+			<div class="row m-0">
+    			<div class="col-sm-6 col-md-4 mt-2">
+					<div class="d-flex align-items-center">
+						<input type="radio" class="" style="width:20px; height: 20px;" name="use_type" value="home">
+						<p class="mb-0 ml-3 small"> Personal / Home </p>
+					</div>
+	    		</div>
+
+    			<div class="col-sm-6 col-md-4 mt-2">
+					<div class="d-flex align-items-center">
+						<input type="radio" class="" style="width:20px; height: 20px;" name="use_type" value="office">
+						<p class="mb-0 ml-3 small"> Coporate / Office </p>
+					</div>
+	    		</div>
+    			
+    			<div class="col-sm-6 col-md-4 mt-2">
+					<div class="d-flex align-items-center">
+						<input type="radio" class="" style="width:20px; height: 20px;" name="use_type" value="gov">
+						<p class="mb-0 ml-3 small"> Government </p>
+					</div>
+	    		</div>
+    		</div>
+		</div>
+
+		<div class="form-group card p-2 border-0 rounded shadow-sm mb-3">
+			<p class="label mb-1"> Explanatory notes or enqiuries <small> (optional) </small> </p>
+			<textarea name="notes" class="form-control"></textarea>
+		</div>
+
+		<div class="">
+			<button class="btn btn-primary"> Get a quote now </button>
+		</div>
+	</form>
+</div>
+
+{% endblock content %}

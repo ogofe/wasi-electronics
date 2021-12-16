@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wasi Electronics Admin | {{ page_title }} </title>
+    <link rel="stylesheet" href="{% static 'wasi_site/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'wasi_site/css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'wasi_site/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'wasi_site/css/admin.css' %}">
+</head>
+<body>
+    <div class="navbar bg-light position-sticky shadow-sm"  style="top: 0; z-index: 10;">
+        <div class="row m-0 container-fluid justify-content-between align-items-center w-100">
+            <a href="{% url 'core:home' %}" class="navbar-brand text-dark font-weight-bolder flex-wrap"> Wasi Electronics </a>
+            <div class="nav">
+                <div class="chip p-2">
+                    <span class="fas fa-user text-white"></span>
+                    <button class="div bg-transparent border-0" onclick="toggleNavOptions()">
+                        <small class="text-white font-weight-bold mr-2"> {{user|title}} </small>
+                        <span class="fas fa-caret-down text-white mr-1"></span>
+                    </button>
+                </div>
+
+                <div id="nav__options" class="p-2 bg-dark rounded closed">
+                    <a href="#" class="w-100 btn btn-sm d-block text-left text-white bold">
+                         <i class="fas fa-passport mr-2"></i> Change password
+                    </a>
+
+                    <a href="{% url 'wasi_admin:logout' %}" class="w-100 text-left btn btn-sm mt-3 d-block text-white bold">
+                        <i class="fas fa-lock mr-2"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="bg-info p-3 alert rounded-0" onload="hideAlert()" id="alert">
+                <p class="text-white mb-0 small font-weight-bold">{{ message }}</p>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <section class="admin-content container-fluid pt-5 pb-5">
+    {% block content %}
+    {% endblock content %}
+    </section>
+
+
+    <script>
+        const nav__options = document.getElementById('nav__options');
+        const hideAlert = () => {
+            let alert = document.querySelector('alert')
+            setTimeout(() => {alert.classList.add('hide')}, 3900)
+            setTimeout(() => {alert.style.display = "none"}, 4000)
+        }
+
+        function toggleNavOptions(){
+            if (nav__options.classList.contains('open')) {
+                nav__options.classList.replace('open', 'closed')
+            } else {
+                nav__options.classList.replace('closed', 'open')                
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Wasi Electronics | Login To Admin </title>
+    <link rel="stylesheet" href="{% static 'wasi_site/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'wasi_site/css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'wasi_site/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'wasi_site/css/auth.css' %}">
+</head>
+<body>
+    <div class="ml-auto mr-auto mt-5" style="max-width: 500px">
+        <h4 class="text-muted font-weight-bold text-center">Wasi Electronics </h4>
+        
+                <p class="text-danger mt-5 mb-2 rounded p-2 bg-light text-center"> A message {{ message }} </p>
+        {% if messages %}
+            {% for message in messages %}
+            {% endfor %}
+        {% endif %}
+
+        <form method="post" class="card shadow border-0 p-4 mt-4 mb-4">
+            {% csrf_token %}
+            <h4 class="text-muted font-weight-bold"> Login </h4>
+
+            <div class="form-group">
+                <p class="form-label"> Username </p>
+                <input type="text" name="username" id="" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <p class="form-label"> Password </p>
+                <input type="password" name="password" id="" class="form-control">
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary font-weight-bold w-50"> Login </button>
+            </div>
+        </form>
+
+        <p class="bg-light p-2 rounded mt-5">
+            <a href="{% url 'core:home' %}" class="link bold"> <i class="fas fa-chevron-left"></i> Back to main site </a>
+        </p>
+    </div>
+</body>
+</html>

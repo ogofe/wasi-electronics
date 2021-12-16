@@ -1,0 +1,90 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="apps-container container-fluid">
+    <div class="header container-fluid p-2 rounded position-sticky">
+        <h5 class="bold text-dark m-0"> <span class="fas fa-group"></span> Admin Dashboard </h5>
+    </div>
+
+    <div class="mt-3">
+        <h6 class="app-container__header bold mb-0 font-weight-bold pl-4 p-2 bg-dark text-white rounded"> <span class="fas fa-store mr-2 border-bottom"></span> Online Store </h6>
+        <ul class="list-unstyled p-1 pt-3 pb-3 m-0 bg-light row">        
+            <li class="col-sm-6 col-md-4 mt-2 mb-2">
+                <div class="p-3 card border-0 shadow">
+                    <h6 class="fas fa-tag"></h6>
+                    <h6 class="app_name font-weight-bold mb-2"> Product Manager </h6>
+                    <p class="small">
+                        Manage products that are displayed in the online store.
+                    </p>
+                    <div class="text-right">
+                        <a href="{% url 'wasi_admin:products-list' %}" class="btn btn-sm btn-primary bold"> Enter Product Manager </a>
+                    </div>
+                </div>
+            </li>
+            
+            <li class="col-sm-6 col-md-4 mt-2 mb-2">
+                <div class="p-3 card border-0 shadow">
+                    <h6 class="fas fa-receipt"></h6>
+                    <h6 class="app_name font-weight-bold mb-2"> Order Manager </h6>
+                    <p class="small">
+                        Manage orders from the online store and general sales.
+                    </p>
+                    <div class="text-right">
+                        <a href="{% url 'wasi_admin:orders-list' %}" class="btn btn-sm btn-primary bold"> Enter Order Manager </a>
+                    </div>
+                </div>
+            </li>
+            
+            <li class="col-sm-6 col-md-4 mt-2 mb-2">
+                <div class="p-3 card border-0 shadow">
+                    <h6 class="fas fa-group"></h6>
+                    <h6 class="app_name font-weight-bold mb-2"> Customer Manager </h6>
+                    <p class="small">
+                        Manage customer that are buy things from the online store.
+                    </p>
+                    <div class="text-right">
+                        <a href="{% url 'wasi_admin:customers-list' %}" class="btn btn-sm btn-primary bold"> Enter Customer Manager </a>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+
+    <div class="mb-3">
+        <h6 class="app-container__header bold mb-0 font-weight-bold pl-4 p-2 bg-dark text-white rounded"> <span class="fas fa-building mr-2 border-bottom"></span> Company </h6>
+        <ul class="list-unstyled row m-0 p-1 pt-3 pb-3 bg-light">
+            <li class="col-sm-6 col-md-4 mt-2 mb-2">
+                <div class="p-3 card border-0 shadow">
+                    <h6 class="fas fa-tools"></h6>
+                    <h6 class="app_name font-weight-bold mb-2"> Solution Manager </h6>
+                    <p class="small">
+                        Manage solutions that we provide.
+                    </p>
+                    <div class="text-right">
+                        <a href="{% url 'wasi_admin:solutions' %}" class="btn btn-sm btn-primary bold"> Enter solutions Manager </a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="col-sm-6 col-md-4 mt-2 mb-2">
+                <div class="p-3 card border-0 shadow">
+                    <h6 class="fas fa-cog"></h6>
+                    <h6 class="app_name font-weight-bold mb-2"> Project Manager </h6>
+                    <p class="small">
+                        Manage company projects, display them on the main site and more.
+                    </p>
+                    <div class="text-right">
+                        <a href="{% url 'wasi_admin:projects' %}" class="btn btn-sm btn-primary bold"> Enter Project Manager </a>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+
+</div>
+
+{% endblock content %}

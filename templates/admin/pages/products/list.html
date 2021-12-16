@@ -1,0 +1,64 @@
+{% extends '../base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container">
+    <div class="d-flex mt-3 mb-4 align-items-center navigation justify-content-start">
+        <a href="{% url 'wasi_admin:dashboard' %}" class="btn shadow-sm btn-sm btn-dark bold"> <span class="fas fa-chevron-left"></span> Back </a>
+        <h6 class="text-dark ml-3 mb-0 bold"> Products </h6>
+    </div>
+    
+    <div class="row justify-content-between m-0">
+        <div class="search-box"></div>
+        <a href="{% url 'wasi_admin:add-product' %}" class="btn shadow-sm btn-primary bold"> <span class="fas fa-plus"></span> Add Product </a>
+    </div>
+
+    <div class="mt-4">
+        {% if products.count > 0 %}
+            <table class="mt-5 w-100 text-nowrap d-block">
+                <thead>
+                    <th class="bold p-2 bg-dark text-white w-50"> Product </th>
+                    <th class="bold p-2 bg-dark text-white w-25"> Price </th>
+                    <th class="bold p-2 bg-dark text-white w-25"> In Stock </th>
+                    <th class="bold p-2 bg-dark text-white w-25"> Actions </th>
+                </thead>
+                <tbody>
+                {% for product in products %}
+                    <tr class="w-50 {% if forloop.counter|divisibleby:"2" == 0 %} bg-light {% else %} bg-dark text-light {% endif %}">
+                        <td class="p-2">
+                            <span class=""> {{ product.name }} </span>
+                        </td>
+                        <td class="w-25 p-2">
+                            <span class=""> ₦{{ product.price }} </span>
+                        </td>
+                        <td class="w-25 p-2">
+                            <span class=""> {{ product.quantity }} </span>
+                        </td>
+                        <td class="w-25 p-2 d-flex justify-content-start">
+                            <a href="{% url 'wasi_admin:edit-product' product.product_id %}" class="text-warning p-2 small rounded">
+                                <span class="fas fa-edit"></span>
+                            </a>
+
+                            <a href="{% url 'wasi_admin:delete' 'product' product.id %}" class="ml-4 p-2 small text-danger rounded">
+                                <span class="fas fa-trash"></span>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="container text-center mt-5">
+                <h1 class="fas fa-inbox mb-4" style="font-size: 100px"></h1>
+                <p class="text-muted h5 bold mb-3">
+                    There are no products in the store
+                </p>
+
+                <a href="{% url 'wasi_admin:add-product' %}" class="btn font-weight-bold btn-primary"> Create a new product </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,45 @@
+{% extends '../base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container">
+    <div class="d-flex mt-3 mb-4 align-items-center navigation justify-content-start">
+        <a href="{% url 'wasi_admin:products-list' %}" class="btn shadow-sm btn-sm btn-dark bold"> <span class="fas fa-chevron-left"></span> Back </a>
+        <h6 class="text-dark ml-3 mb-0 bold"> Edit product </h6>
+    </div>
+
+    <div class="form-wrapper mt-5 m-0" style="max-width: 600px;">
+        <form enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            <div class="card border-0 p-2 mb-4 form-group shadow-sm">
+                <p class="form-label font-weight-bold mb-1"> Product name </p>
+                <input value="{{product.name}}"  type="text" name="name" id="" required class="form-control">
+            </div>
+            
+            <div class="card border-0 p-2 mb-4 form-group shadow-sm">
+                <p class="form-label font-weight-bold mb-1"> Product price </p>
+                <input value="{{product.price}}"  type="number" name="price" id="" required class="form-control">
+            </div>
+            
+            <div class="card border-0 p-2 mb-4 form-group shadow-sm">
+                <p class="form-label font-weight-bold mb-1"> Product stock quantity </p>
+                <input value="{{product.quantity}}"  type="number" name="quantity" id="" required class="form-control">
+            </div>
+            
+            <div class="card border-0 p-2 mb-4 form-group shadow-sm">
+                <p class="form-label font-weight-bold mb-1"> Product category </p>
+                <input value="{{product.category}}"  type="text" name="category" id="" required class="form-control">
+            </div>
+            
+            <div class="card border-0 p-2 mb-4 form-group shadow-sm">
+                <p class="form-label font-weight-bold mb-1"> Product description </p>
+                <textarea placeholder="min 10 words, supports markdown" name="description" id="" required class="form-control">{{product.description}}</textarea>
+            </div>
+
+            <button class="btn font-weight-bold btn-sm btn-primary"> Save product </button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

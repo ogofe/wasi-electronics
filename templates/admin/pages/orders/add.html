@@ -1,0 +1,115 @@
+{% extends '../base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container">
+
+    <div class="overlay d-none">
+        <div class="add-form">
+            <h6 class="mb-4 bold"> Add product to this order </h6>
+            <div class="form-group">
+                <p class="form-label"> Product </p>
+                <select required id="sel_product" class="form-control">
+                    <option value="" selected disabled> Select product </option>
+                    {% for item in products %}
+                        <option value="{{item.item}}:{{item.id}}"> {{ item.item }} </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <p class="form-label"> Quantity </p>
+                <input required value="1" type="number" name="quantity" id="sel_product_qty" class="form-control">
+            </div>
+
+            <button class="cta btn btn-sm btn-primary" onclick="addItem()"> Add to order </button>
+            <button class="cta btn btn-sm ml-4 btn-warning" type="button" onclick="hideForm()"> Cancel </button>
+        </div>
+    </div>
+
+    <div class="d-flex mt-3 mb-4 align-items-center navigation justify-content-start">
+        <a href="{% url 'wasi_admin:orders-list' %}" class="btn shadow-sm btn-sm btn-dark bold"> <span class="fas fa-chevron-left"></span> Back </a>
+        <h6 class="text-dark ml-3 mb-0 bold"> Add new order </h6>
+    </div>
+
+    <div class="form-wrapper mt-5 m-0" style="max-width: 600px;">
+        <form enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            <div class="card border-0 p-2 mb-4 form-group shadow-sm">
+                <p class="form-label font-weight-bold mb-1"> Customer </p>
+                <select name="customer" id="" class="form-control">
+                    {% for customer in customers %}
+                        <option value="{{ customer.id }}"> {{ customer.fullname }} </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="card border-0 p-2 mb-4 form-group shadow-sm">
+                <p class="form-label font-weight-bold mb-1"> Delivery </p>
+                <div class="text-left">
+                    <span class="d-flex align-items-center">
+                        <input type="radio" name="delivery" value="on" class="p-3 mr-3" style="width: 23px; height: 23px;">
+                        <span> Yes </span>
+                    </span>
+
+                    <span class="d-flex align-items-center mt-2">
+                        <input type="radio" name="delivery" value="off" class="p-3 mr-3" style="width: 23px; height: 23px;">
+                        <span> No </span>
+                    </span>
+
+                    <p class="mb-0 mt-3 text-muted"> Will this item be delivered? </p>
+                </div>
+            </div>
+            
+            <div class="card border-0 p-2 mb-4 form-group shadow-sm">
+                <p class="form-label d-flex justify-content-between align-items-center mb-1">
+                    <span> Products in Order </span>
+                    <button type="button" onclick="showForm()" class="btn btn-sm btn-primary" onclick="addItem()"><span class="fas fa-plus"></span> Add product </button>
+                </p>
+                <ul id="items" class="list-unstyled mt-3">
+                    
+                </ul>
+            </div>
+
+            <button class="btn font-weight-bold btn-sm btn-primary"> Save order </button>
+        </form>
+    </div>
+</div>
+
+{{ products|json_script:"products" }}
+
+<script>
+    const items = document.getElementById('items');
+    let products = JSON.parse(document.getElementById('products').textContent);
+
+    function addItem(){
+        const prod = document.getElementById('sel_product').value;
+        const qty = document.getElementById('sel_product_qty').value;
+        items.insertAdjacentHTML('afterbegin', `<input type="hidden" name="item" value="${prod.split(':')[1]}:${qty}">`);
+        items.insertAdjacentHTML('afterbegin',
+        `<li class="text-dark shadow-sm p-2 rounded border-0 mb-2 d-flex justify-content-between align-items-center">
+            <span> ${prod.split(':')[0]} x ${qty} </span>
+            <button type="button" class="btn btn-sm btn-danger fas fa-trash" onclick="remove()"> </button>
+        </li>`
+        );
+        hideForm();
+    }
+
+    function hideForm(){
+        document.querySelector('.overlay').classList.add('d-none')
+    }
+
+    function showForm(){
+        document.querySelector('.overlay').classList.remove('d-none')
+    }
+
+    function remove(){
+        const elem = event.target.parentElement;
+        console.log(elem)
+        elem.remove()
+    }
+
+</script>
+
+{% endblock content %}

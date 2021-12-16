@@ -1,0 +1,441 @@
+:root{
+    font-family: "Font Awesome 5 Free" !important;
+}
+
+body *{
+    outline: 0;
+}
+
+.mt-7{
+    margin-top: 7rem;
+}
+
+.mb-7{
+    margin-bottom: 7rem;
+}
+
+.bold, .bolder{
+    font-weight: 700;
+}
+
+body{
+    /* font-family: "Font Awesome 5 Free" ; */
+    font-family: "Jost", sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-weight: 800;
+}
+
+.navbar{
+    background-color: #203e65;
+}
+
+.heading h2::before {
+	content: '';
+	position: relative;
+	display: block;
+	width: 120px;
+	height: 1px;
+	background: #ddd;
+	bottom: -40px;
+	left: calc(50% - 60px);
+}
+
+
+.heading h2::after {
+    content: '';
+	position: relative;
+	display: block;
+	width: 40px;
+	height: 3px;
+	background: #47b2e4;
+	bottom: 0;
+	left: calc(50% - 20px);
+}
+
+.align-center{
+    align-items: center !important;
+}
+
+button:active, button:focus{
+    outline: none !important;
+}
+
+.no-decor, .no-decor:hover{
+    text-decoration: none;
+}
+
+.max-w-5{
+    max-width: 500px;
+}
+
+.dark_text{
+    color: #4e4a4a !important;
+}
+
+.footer{
+    background: #efefef;
+    padding: 2.5rem 2rem;
+}
+
+#quote{
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+#navbar.scroll{
+    background-color: #203e65;
+    position: sticky;
+    top: 0;
+    animation: fadeIn forwards .4s;
+    transition: .4s;
+    z-index: 100;
+}
+
+.btn-start{
+    color: white;
+    border: 1px solid lavender;
+    border-radius: 0px;
+    font-weight: 700;
+    background-color: #e3780a;
+    padding: .7rem 1.2rem;
+}
+
+.btn-start:hover{
+    color: orange;
+    border-color: #e3780a;
+    background-color: transparent;
+}
+
+.hero-img{
+    max-width: 500px;
+    max-height: 500px;
+}
+
+.hero-text{
+    margin-top: 5rem;
+    margin-left: 5rem;
+}
+
+.hero-img img{
+    width: 100%;
+    height: 100%;
+}
+
+.navbar-toggler *{
+    outline: 0 !important;
+
+}
+
+.navbar-toggler {
+	border: 2px solid;
+    padding: .5rem;
+    border-radius: 80px;
+    display: none;
+}
+
+.dropdown-menu{
+    display: none;
+    animation: fadeOut .8s;
+}
+
+.dropdown-item{
+    padding: 0;
+}
+
+.dropdown-item:hover{
+    transition: .5s;
+    color: white;
+    background-color: #6584ad;
+}
+.dropdown-item:hover a{
+    transition: .25s;
+    color: white !important;
+}
+
+.nav-links{
+    padding: 0;
+}
+
+.nav-link-item{
+    border-bottom: 2px solid transparent;
+    transition: .7s;
+    margin: 0 10px;
+}
+
+.nav-link-item:hover{
+    border-color: #e3780a;
+}
+
+a.nav-link{
+    color: white;
+    font-weight: bold;
+}
+
+.nav-link-item, li{
+    list-style: none;
+}
+
+.header{
+    background-color: rgb(23, 83, 161);
+}
+
+.hero{
+    min-height: 600px;
+    background-image: url('../images/hero-img.png');
+    background-repeat: no-repeat;
+    background-blend-mode: color;
+    background-clip: content-box;
+    background-size: contain;
+    background-position-x: left;
+    background-color: rgba(43, 42, 42, 0.5);
+    background-position-y: bottom;
+    animation: swerveBg 7s forwards infinite;
+}
+
+
+@keyframes swerveBg{
+    from{
+        background-position-x: -5%;
+    }
+    50%{
+        background-position-x: 5%;
+    }
+    to{
+        background-position-x: -5%;
+    }
+}
+
+@media (max-width: 860px){
+    .nav-wrapper{
+        position: absolute;
+        left: 0;
+        width: 100%;
+        background-color: #1f3c61;
+        z-index: 2;
+        top: 50px;
+        transition: .7s;
+    }
+
+    .hero{
+        background-position-x: left;
+        background-position-y: 30%;
+    }
+    
+    .nav{
+        padding: 2rem;
+    }
+
+    .navbar-toggler{
+        display: block;
+    }
+
+    .nav-wrapper.closed{
+        transform: translateY(-400px);
+
+    }
+
+    .nav-wrapper.open{
+        transform: translateY(0px);
+        transition: .4s;
+    }
+}
+
+@media (max-width: 600px){
+    .hero-text{
+        margin-left: 1rem;
+    }
+}
+
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut{
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+        display: none;
+    }
+}
+
+
+.carousel-inner {
+    padding: 2rem 0;
+    min-height: 100%;
+    max-height: max-content;
+}
+
+#content{
+    min-height: 50vh;
+    max-height: max-content;
+}
+
+#backtotop{
+    position: fixed;
+    bottom: 120px;
+    right: 10px;
+    background-color: #0000007a;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color:  white;
+    font-size: 25px;
+    z-index: 5;
+    border: none;
+}
+
+.cta{
+    padding: 10px 15px;
+    min-width: 100px;
+    max-width: 150px;
+}
+
+#backtotop.hide{
+    animation: fadeOut forwards .5s;
+}
+
+#backtotop.show{
+    animation: fadeIn forwards .5s;
+}
+
+.slide{
+    min-height: 400px;
+    max-height: max-content;
+    display: inline;
+    float: unset !important;
+    transition: .6s;
+    animation: fadeIn 1.3s;
+	color: white;
+	margin: auto;
+    max-width: 80%;
+    animation: fadeIn .8s;
+}
+
+.w-fit{
+    max-width: max-content;
+}
+
+.slide .caption{
+    position: relative;
+}
+
+@media (max-width:530px){    
+    
+    .slide .caption{
+        position: relative;
+        top: 15%;
+    }
+
+    nav .nav-wrapper .nav{
+        display: block;
+    }
+}
+
+@media (max-width:350px){
+    nav .dropdown-menu{
+        left: 0%;
+    } 
+}
+
+@media screen and (hover:any){ 
+    .dropdown:hover .dropdown-menu{
+        display: block;
+        animation: fadeIn .8s;
+    }
+}
+
+@media screen and (hover:hover){ 
+    .dropdown:hover .dropdown-menu{
+        display: block;
+        animation: fadeIn .8s;
+    }
+    .icon{
+        filter: grayscale(100%);
+    }
+    a:hover .icon{
+        transition: .6s;
+        filter: none;
+    }
+}
+
+.dropdown.open .dropdown-menu{
+    display: block;
+    animation: fadeIn .8s;
+}
+
+.icon{
+    width: 23px;
+    height: 23px;
+}
+
+.carousel{
+    min-height: 450px;
+    max-height: max-content;
+}
+
+.proof-slide {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    max-width: 100%;
+}
+
+
+.proof-card{
+    margin: 10px auto;
+    min-height: 300px;
+    max-height: 300px;
+    background-image: url('../images/lamp.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-clip: border-box;
+}
+
+.proof-card img{
+    height: 100%;
+}
+
+.max-h-3{
+    max-height: 300px;
+}
+
+.max-h-4{
+    max-height: 400px;
+}
+
+.max-h-5{
+    max-height: 500px;
+}
+
+.carousel-item.active{
+    display: block;
+}
+
+.carousel-item.closed{
+    display: none;
+}
+
+.chip{
+    width: 140px;
+    height: 140px;
+    padding: .5rem;
+    border: 2px solid lavender;
+    border-radius: 100px;
+    margin: auto;
+}
+
+.chip img{
+    border-radius: inherit;
+    width: 100%;
+    height: 100%;
+}
