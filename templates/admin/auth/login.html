@@ -14,9 +14,9 @@
     <div class="ml-auto mr-auto mt-5" style="max-width: 500px">
         <h4 class="text-muted font-weight-bold text-center">Wasi Electronics </h4>
         
-                <p class="text-danger mt-5 mb-2 rounded p-2 bg-light text-center"> A message {{ message }} </p>
         {% if messages %}
             {% for message in messages %}
+                <p class="text-danger mt-5 mb-2 rounded p-2 bg-light text-center"> {{ message }} </p>
             {% endfor %}
         {% endif %}
 

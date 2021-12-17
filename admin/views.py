@@ -27,6 +27,8 @@ from core.models import (
     FileObject
 )
 
+images = ['png', 'jpg', 'jpeg']
+videos = ['avi', 'mp4', '3gp']
 
 def logout_view(request):
     logout(request)
@@ -239,62 +241,6 @@ def order_detail_view(request, invoice):
 
 
 @login_required(login_url='wasi_admin:login-page')
-def projects_list_view(request):
-    context = {
-        'projects': Project.objects.all(),
-    }
-    return render(request, 'admin/pages/projects/list.html', context)
-
-
-@login_required(login_url='wasi_admin:login-page')
-def project_create_view(request):
-    if request.method == "POST":
-        data, uploads = request.POST, request.FILES
-        new_project = Project(
-            title = data['title'],
-            description = data['description'],
-            complete = data['completed']
-        )
-        new_project.save()
-        if uploads.getlist('upload'):
-            for file in uploads.getlist('upload'):
-                if file.split('.')[-1] == '.jpg' or file.split('.')[-1] == '.png' or file.split('.')[-1] == '.jpeg':
-                    pass
-                elif file.split('.')[-1] == '.mp4' or file.split('.')[-1] == '.mpeg':
-                    pass
-                pass
-            new_project.save()
-        messages.success(request, "Successfully added new project")
-        return redirect('wasi_admin:projects')
-    return render(request, 'admin/pagesprojects/add.html', {})
-
-
-@login_required(login_url='wasi_admin:login-page')
-def project_edit_view(request, pk):
-    project = Projects.objects.get(id=pk)
-    if request.method == "POST":
-        data, uploads = request.POST, request.FILES
-        project.title=data['title']
-        project.description=data['description']
-        project.completed=data['completed']
-        project.save()
-        if uploads.getlist('upload'):
-            for file in uploads.getlist('upload'):
-                if file.split('.')[-1] == '.jpg' or file.split('.')[-1] == '.png' or file.split('.')[-1] == '.jpeg':
-                    pass
-                elif file.split('.')[-1] == '.mp4' or file.split('.')[-1] == '.mpeg':
-                    pass
-                pass
-            new_project.save()
-        messages.success(request, "Successfully changed project %s " % project.title)
-        return redirect('wasi_admin:home')
-    context = {
-        'project': Project.objects.all(),
-    }
-    return render(request, 'admin/pages/projects/edit.html', context)
-
-
-@login_required(login_url='wasi_admin:login-page')
 def solutions_list_view(request):
     context = {
         'solutions': Solution.objects.all(),
@@ -329,17 +275,76 @@ def solution_edit_view(request, pk):
     if request.method == "POST":
         data, uploads = request.POST, request.FILES
         solution.name=data['name']
-        solution.about_solution=data['about_solution']
+        solution.description=data['about']
         files = uploads.getlist('file', None)
-        if files:
+        if files: # new files, as old files can be deleted directly from the edit page
             for file in files:
                 upload = FileObject(file=file)
                 upload.save()
                 solution.files.add(upload)
             solution.save()
         messages.success(request, "Successfully changed solution %s" % solution.name)
-        return redirect('wasi_admin:home')
+        return redirect('wasi_admin:solutions')
     context = {
-        'solutions': solution,
+        'solution': solution,
     }
     return render(request, 'admin/pages/solutions/edit.html', context)
+
+
+# DEPRECATED
+# For later
+# @login_required(login_url='wasi_admin:login-page')
+# def projects_list_view(request):
+#     context = {
+#         'projects': Project.objects.all(),
+#     }
+#     return render(request, 'admin/pages/projects/list.html', context)
+
+
+# @login_required(login_url='wasi_admin:login-page')
+# def project_create_view(request):
+#     if request.method == "POST":
+#         data, uploads = request.POST, request.FILES
+#         new_project = Project(
+#             title = data['title'],
+#             description = data['description'],
+#             complete = data['completed']
+#         )
+#         new_project.save()
+#         if uploads.getlist('upload'):
+#             for file in uploads.getlist('upload'):
+#                 if file.split('.')[-1] == '.jpg' or file.split('.')[-1] == '.png' or file.split('.')[-1] == '.jpeg':
+#                     pass
+#                 elif file.split('.')[-1] == '.mp4' or file.split('.')[-1] == '.mpeg':
+#                     pass
+#                 pass
+#             new_project.save()
+#         messages.success(request, "Successfully added new project")
+#         return redirect('wasi_admin:projects')
+#     return render(request, 'admin/pagesprojects/add.html', {})
+
+
+# @login_required(login_url='wasi_admin:login-page')
+# def project_edit_view(request, pk):
+#     project = Project.objects.get(id=pk)
+#     if request.method == "POST":
+#         data, uploads = request.POST, request.FILES
+#         project.title=data['title']
+#         project.description=data['description']
+#         project.completed=data['completed']
+#         project.save()
+#         if uploads.getlist('upload'):
+#             for file in uploads.getlist('upload'):
+#                 if file.split('.')[-1] in videos:
+#                     pass
+#                 elif file.split('.')[-1] in images:
+#                     pass
+#                 pass
+#             new_project.save()
+#         messages.success(request, "Successfully changed project %s " % project.title)
+#         return redirect('wasi_admin:home')
+#     context = {
+#         'project': Project.objects.all(),
+#     }
+#     return render(request, 'admin/pages/projects/edit.html', context)
+

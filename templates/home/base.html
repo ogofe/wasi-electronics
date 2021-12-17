@@ -79,9 +79,10 @@
     <footer class="footer">
         <h3 class="dark_text"> Wasi Electronics </h3>
         <div class="mt-2 mb-3 dark_text" style="max-width: 600px;">
-            <p class="small"> Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+            <p class="small">
+                 Wasi Electronics is a company which has been around for over 15 years.
+                 
+            </p>
         </div>
 
         <div class="row mt-5">
@@ -126,7 +127,35 @@
         </div>
 
         <h6 class="bold small mt-4 text-center dark_text"> <i class="fas fa-copyright"></i> 2021 </h6>
+        <div id="fb-root"></div>
 
+        <!-- Your Chat Plugin code -->
+        <div id="fb-customer-chat" class="fb-customerchat">
+        </div>
+
+        <script>
+            var chatbox = document.getElementById('fb-customer-chat');
+            chatbox.setAttribute("page_id", "109443834918677");
+            chatbox.setAttribute("attribution", "biz_inbox");
+        </script>
+
+        <!-- Your SDK code -->
+        <script>
+            window.fbAsyncInit = function() {
+            FB.init({
+                xfbml            : true,
+                version          : 'v12.0'
+            });
+            };
+
+            (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
     </footer>
 
     <button id="backtotop" class="hide">

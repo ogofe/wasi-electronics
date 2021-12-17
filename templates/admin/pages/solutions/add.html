@@ -13,17 +13,17 @@
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group card border-0 shadow-sm mb-4 p-2">
-                <p class="form-label bold mb-1"> solution name </p>
+                <p class="form-label bold mb-1"> Solution name </p>
                 <input required type="text" name="name" class="form-control">
             </div>
             
             <div class="form-group card border-0 shadow-sm mb-4 p-2">
-                <p class="form-label bold mb-1"> solution detail </p>
-                <textarea required placeholder="Type solution detail (supports markdown)" style="min-height: 120px; max-height: 350px" name="about" class="form-control"></textarea>
+                <p class="form-label bold mb-1"> Solution detail </p>
+                <textarea id="editor" placeholder="Type solution detail (supports markdown)" style="min-height: 120px; max-height: 350px" name="about" class="form-control"></textarea>
             </div>
 
             <div class="form-group card border-0 shadow-sm mb-4 p-2">
-                <p class="form-label bold mb-1"> solution Files </p>
+                <p class="form-label bold mb-1"> Solution Files </p>
                 <p class="small mb-1"> Add images showing proof of solution </p>
                 <ul class="list-group border rounded p-2" id="uploads">
                 </ul>
@@ -39,6 +39,8 @@
         </form>
     </div>
 </div>
+
+<script src="{% static 'wasi_site/js/ckeditor.js' %}"></script>
 
 <script>
     const loader = document.getElementById('uploader');
@@ -74,6 +76,18 @@
         input.remove()
         elem.remove()
     }
+
+    ClassicEditor
+        .create( document.querySelector( '#editor' ), {
+            toolbar: [ 'heading', '|', 'undo', 'redo', '|', 'bold', 'italic', 'link', '|', 'bulletedlist', 'numberedlist' ]
+        } )
+        .then( editor => {
+            window.editor = editor;
+        } )
+        .catch( err => {
+            console.error( err.stack );
+        } );
+    
 </script>
 
 {% endblock content %}

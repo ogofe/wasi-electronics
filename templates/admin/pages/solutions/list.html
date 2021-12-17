@@ -11,25 +11,25 @@
     
     <div class="row justify-content-between m-0">
         <div class="search-box"></div>
-        <a href="{% url 'wasi_admin:add-service' %}" class="btn shadow-sm btn-primary bold"> <span class="fas fa-plus"></span> Add Service </a>
+        <a href="{% url 'wasi_admin:add-solution' %}" class="btn shadow-sm btn-primary bold"> <span class="fas fa-plus"></span> Add a Solution </a>
     </div>
 
     <div class="mt-4">
-        {% if services.count > 0 %}
+        {% if solutions.count > 0 %}
             <div class="mt-5 w-100 text-nowrap d-block">
                 <ul>
-                {% for service in services %}
-                    <li class="shadow card border-0 mb-4">
-                        <p class="bold"> {{ service.name }} </sppan>
-                        <p class=""> {{ service.about_service|truncatewords:"50" }} </p>
+                {% for solution in solutions %}
+                    <li class="shadow card border-0 p-3 mb-4">
+                        <p class="bold mb-0"> {{ solution.name }} </sppan>
+                        <div class=""> {{ solution.description|safe|truncatewords:"50" }} </div>
                         
-                        <div class="w-25 p-2 d-flex justify-content-start">
-                            <a href="{% url 'wasi_admin:edit-product' product.product_id %}" class="btn btn-sm p-2 small btn-warning">
-                                <span class="fas fa-edit"></span>
+                        <div class="d-flex justify-content-start">
+                            <a href="{% url 'wasi_admin:edit-solution' solution.id %}" class="btn btn-sm btn-warning">
+                                <span class="fas fa-edit"></span> Edit
                             </a>
 
-                            <a href="{% url 'wasi_admin:delete' 'product' product.id %}" class="btn btn-sm ml-4 p-2 small btn-danger">
-                                <span class="fas fa-trash"></span>
+                            <a href="{% url 'wasi_admin:delete' 'solution' solution.id %}" class="btn btn-sm ml-4 btn-danger">
+                                <span class="fas fa-trash"></span> Delete
                             </a>
                         </div>
                     </li>
@@ -40,10 +40,10 @@
             <div class="container text-center mt-5">
                 <h1 class="fas fa-tools mb-4" style="font-size:100px"></h1>
                 <p class="text-muted h4 mb-3 bold">
-                    There are no services yet!
+                    There are no solutions yet!
                 </p>
 
-                <a href="{% url 'wasi_admin:add-service' %}" class="btn font-weight-bold btn-primary"> Add new service </a>
+                <a href="{% url 'wasi_admin:add-solution' %}" class="btn font-weight-bold btn-primary"> Add new service </a>
             </div>
         {% endif %}
     </div>
