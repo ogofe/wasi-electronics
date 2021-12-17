@@ -5,10 +5,6 @@ const carousels = {
         slides: document.querySelector('#reviews').querySelectorAll('.carousel-item'),
         dots: document.querySelector('#reviews').querySelector('.carousel-indicators').children,
     },
-    projects: {
-        slides: document.querySelector('#projects').querySelectorAll('.carousel-item'),
-        dots: document.querySelector('#projects').querySelector('.carousel-indicators').children,
-    }
 }
 let idx;
 let current = 0

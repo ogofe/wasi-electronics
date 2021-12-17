@@ -72,6 +72,9 @@ def delete_resource_view(request, resource, arg):
         'order': {
             'model': CheckoutOrder,
         },
+        'file': {
+            'model': FileObject,
+        },
     }
     model = resources[resource]['model']
     object_ = model.objects.get(pk=arg)
@@ -282,7 +285,7 @@ def solution_edit_view(request, pk):
                 upload = FileObject(file=file)
                 upload.save()
                 solution.files.add(upload)
-            solution.save()
+        solution.save()
         messages.success(request, "Successfully changed solution %s" % solution.name)
         return redirect('wasi_admin:solutions')
     context = {

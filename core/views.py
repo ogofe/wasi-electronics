@@ -1,8 +1,13 @@
 from django.shortcuts import render, redirect
 from .models import (
-	Project
+	Project,
+	Solution
 )
 
+resources = {
+	'project': Project,
+	'solution': Solution,
+}
 
 
 def homepage_view(request):
@@ -19,27 +24,16 @@ def get_quote_view(request):
 
 
 
-def project_detail_view(request, **kwargs):
-	project = Project.objects.get(title=kwargs['project'])
+def detail_view(request, **kwargs):
+	model = resources[kwargs['model']]
+	subject = model.objects.get(id=kwargs['pk'])
 	context = {
-		'project': project,
-		'subtitle': project.title,
-		'images': project.images,
-		'videos': project.videos,
-
+		'subject': subject,
+		'subtitle': subject.__str__(),
+		'images': ['png', 'jpg', 'jpeg'],
+		'videos': ['3gp', 'mp4'],
 	}
-	return render(request, 'home/pages/project-page.html', context)
-
-
-
-def service_detail_view(request, **kwargs):
-	context = {
-		'project': project,
-		'subtitle': project.title,
-		'images': project.images,
-		'videos': project.videos,
-	}
-	return render(request, 'home/pages/homepage.html', context)
+	return render(request, 'home/pages/learn-more.html', context)
 
 
 

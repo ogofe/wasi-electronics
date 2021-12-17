@@ -1,5 +1,5 @@
 from django.db import models
-import markdown
+import markdown, os
 
 md = markdown.Markdown()
 
@@ -71,6 +71,13 @@ class FileObject(models.Model):
 
 	def file_type(self):
 		return self.file.name.split('.')[-1]
+
+	def delete(self):
+		name = self.file.name.split('/')[1]
+		dir_ = self.file.path.replace(name, '')
+		os.chdir(dir_)
+		os.remove(name)
+		super().delete()
 
 
 class Solution(models.Model):

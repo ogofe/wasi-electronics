@@ -68,38 +68,6 @@
         <div class="heading">
             <h2 class="text-center p-2"> What We've Done </h2>
 
-            <div id="projects" class="carousel bg-light slides">
-                <a onclick="nextSlide('projects', -1)" class="carousel-control-prev bg-dark">
-                    <span class="carousel-control-prev-icon"></span>
-                </a>
-    
-                <a onclick="nextSlide('projects', 1)" class="carousel-control-next bg-dark">
-                    <span class="carousel-control-next-icon"></span>
-                </a>
-    
-                <div class="carousel-inner">
-                    {% for proof in proof_of_work %}
-                        <div class="carousel-item {% if forloop.counter == 1 %} active {% else %} closed {% endif %} slide proof-slide">
-                            <div class="text-center ">
-                                <img src="http://localhost:8000/media/{{ proof.image.url }}" class="" style="max-width: 400px" width="100%" height="400px" />
-                            </div>
-                            <div class="mt-4 w-fit ml-auto dark_text mr-auto caption text-center mb-4">
-                                <p class="h5 bold">{{ proof.title }}</p>
-
-                                <p class="">
-                                    <a href="{% url 'core:project-page' proof.title %}" class="btn bold rounded btn-dark cta"> More Details </a>
-                                </p>
-                            </div>
-                        </div>    
-                    {% endfor %}
-                </div>
-    
-                <ol class="carousel-indicators">
-                    {% for proof in proof_of_work %}
-                        <li class="bg-dark {% if forloop.counter == 1 %} active {% endif %}"></li>
-                    {% endfor %}
-                </ol>
-            </div>
         </div>
        
 

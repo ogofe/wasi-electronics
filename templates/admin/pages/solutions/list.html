@@ -20,8 +20,8 @@
                 <ul>
                 {% for solution in solutions %}
                     <li class="shadow card border-0 p-3 mb-4">
-                        <p class="bold mb-0"> {{ solution.name }} </sppan>
-                        <div class=""> {{ solution.description|safe|truncatewords:"50" }} </div>
+                        <p class="bold mb-2"> {{ solution.name }} </sppan>
+                        <div class="small" style="overflow:hidden; text-overflow: ellipsis"> {{ solution.description|safe|truncatewords:"10" }} </div>
                         
                         <div class="d-flex justify-content-start">
                             <a href="{% url 'wasi_admin:edit-solution' solution.id %}" class="btn btn-sm btn-warning">

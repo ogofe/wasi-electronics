@@ -1,0 +1,77 @@
+{% extends '../base.html' %}
+{% load static %}
+
+{% block meta_tags %}
+{% endblock meta_tags %}
+
+
+{% block content %}
+
+<style>
+	.markdown-content p{
+		margin-bottom: 5px !important;
+	}
+
+	.markdown-content .{}
+
+	.static-content .gallery{
+		width: 100%;
+		overflow-x: auto;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.static-content .gallery-item:hover{
+		border: 2px solid orangered;
+		transition: .4s;
+	}
+	
+	.static-content .gallery-item{
+		border: 2px solid transparent;
+		transition: .4s;
+		text-align: center;
+		border-radius: 10px;
+		padding: 5px;
+		margin: 5px;
+	}
+
+	.markdown-content .ul{}
+
+	.markdown-content .ul{}
+
+	.markdown-content .ul{}
+
+</style>
+
+
+<div class="pt-5 pb-5 container">
+
+	<h4 class="mb-3 bg-light text-left p-3 text-dark rounded"> {{ subject.name }} </h4>
+
+	<section id="#markdown-content" class="markdown-content p-2">
+		{{ subject.description|safe }}
+	</section>
+
+	<section class="static-content">
+		{% if subject.files.all %}
+			<h6 class="mb-2 bg-light text-left p-2 text-dark rounded"> Gallery </h6>
+
+			<div class="gallery bg-light row m-0 rounded">
+			{% for file in subject.files.all %}
+				{% if file.file_type in images %}
+					<!--  Image Gallery -->
+					<div class="gallery-item">
+						<image src="http://localhost:8000/media/{{file.file.url}}"
+							   alt="" class="rounded" style="width: 250px; height: 250px" />
+						
+						{% comment %} <p class="mt-2 mb-0 bold small"> Image {{ forloop.counter }} of {{ images|length }}</p> {% endcomment %}
+					</div>
+				{% endif %}
+			{% endfor %}
+			</div>
+		{% endif %}			
+	</section>
+
+</div>
+{% endblock content %}

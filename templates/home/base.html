@@ -52,7 +52,7 @@
                         <ul class="dropdown-menu p-0">
                             {% for solution in all_solutions %}
                             <li class="dropdown-item">
-                                <a href="#" class="nav-link text-dark"> {{ solution.name }} </a>
+                                <a href="{% url 'core:learn-more' 'solution' solution.id %}" class="nav-link text-dark"> {{ solution.name }} </a>
                             </li>
                             {% endfor %}
                         </ul>

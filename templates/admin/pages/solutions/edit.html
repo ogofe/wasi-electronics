@@ -3,41 +3,67 @@
 
 
 {% block content %}
+<style>
+
+    .ck.ck-editor__main > .ck-editor__editable{
+        min-height: 150px !important;
+        max-height: 420px !important;
+    }
+</style>
+
+
+
 <div class="container">
     <div class="d-flex mt-3 mb-4 align-items-center navigation justify-content-start">
         <a href="{% url 'wasi_admin:solutions' %}" class="btn shadow-sm btn-sm btn-dark bold"> <span class="fas fa-chevron-left"></span> Back </a>
         <h6 class="text-dark ml-3 mb-0 bold"> Edit a solution </h6>
     </div>
 
-    <div class="mt-4 form-wrapper" style="max-width: 600px">
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="form-group card border-0 shadow-sm mb-4 p-2">
-                <p class="form-label bold mb-1"> Solution name </p>
-                <input required value="{{ solution.name }}" type="text" name="name" class="form-control">
-            </div>
-            
-            <div class="form-group card border-0 shadow-sm mb-4 p-2">
-                <p class="form-label bold mb-1"> Solution detail </p>
-                <textarea id="editor" placeholder="Type solution detail (supports markdown)" style="min-height: 120px; max-height: 350px" name="about" class="form-control">{{ solution.description }}</textarea>
-            </div>
+    <div class="row justify-content-between">
+        <div class="mt-4 form-wrapper col-sm-6 col-lg-7" style="">
+            <form method="post" id="edit-form" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group card border-0 shadow-sm mb-4 p-2">
+                    <p class="form-label bold mb-1"> Give this solution a name </p>
+                    <input required value="{{ solution.name }}" type="text" name="name" class="form-control">
+                </div>
+                
+                <div class="form-group card border-0 shadow-sm mb-4 p-2">
+                    <p class="form-label bold mb-1"> Describe this solution </p>
+                    <textarea id="editor" placeholder="Type here" style="min-height: 200px; max-height: 350px" name="about" class="form-control">{{ solution.description }}</textarea>
+                </div>
 
-            <div class="form-group card border-0 shadow-sm mb-4 p-2">
-                <p class="form-label bold mb-1"> Solution Files </p>
-                <p class="small mb-1"> Add images showing proof of solution </p>
-                <ul class="list-group border rounded p-2" id="uploads">
-                </ul>
+                <div class="form-group card border-0 shadow-sm mb-4 p-2">
+                    <p class="small form-label bold mb-1 "> Add images showing proof of solution </p>
+                    <ul class="list-group border rounded p-2" id="uploads">
+                    </ul>
 
-                <div class="text-right mt-2">
-                    <button type="button" class="btn btn-sm btn-info" onclick="clickUp()"> <span class="fas fa-plus"></span> Add file </button>
+                    <div class="text-right mt-2">
+                        <button type="button" class="btn btn-sm btn-info" onclick="clickUp()"> <span class="fas fa-plus"></span> Add file </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-sm-6 p-0 col-lg-5">
+            <div class="form-group card p-3 rounded border-0 w-100 h-100">
+                <h6 class="bold"> Images for this solution <i class="small">(proof of work)</i> </h6>
+                <div class="row mt-2 m-0">
+                    {% for image in solution.files.all %}
+                        <div style="width: 100px; height: 150px" class="border m-1 p-1 text-center rounded ">
+                            <image src="/media/{{image.file.url}}" class="d-block mb-2" width="100%" height="100px">
+                            <button onclick="removeImage({{image.id}})" class="btn btn-sm btn-warning"> Delete </button>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
-
-            <div>
-                <button type="submit" class="btn btn-sm bold btn-primary"> Save solution </button>
-            </div>
-        </form>
+        </div>
     </div>
+
+    <div style="">
+        <button type="submit" form="edit-form" class="btn btn-sm bold btn-primary"> Save solution </button>
+    </div>
+
 </div>
 
 <script src="{% static 'wasi_site/js/ckeditor.js' %}"></script>
@@ -75,6 +101,15 @@
         let input = document.querySelector('input#upload_'+_id)
         input.remove()
         elem.remove()
+    }
+
+    function removeImage(id){
+        var elem = event.target.parentElement;
+        elem.remove();
+
+        var host = document.location.host
+        var proto = document.location.protocol
+        fetch(`${proto}//${host}/admin/delete/file/${id}`)
     }
 
     ClassicEditor
